@@ -28,6 +28,7 @@ header {
   background-color: var(--header-bg);
 }
 
+/* nav button */
 .nav-btn {
   position: relative;
   cursor: pointer;
@@ -56,7 +57,37 @@ header {
   top: 75%;
 }
 
-nav {
+.nav-btn.active .bar-top {
+  animation: top-to-close 0.6s forwards;
+}
+
+.nav-btn.active .bar-middle {
+  animation: mid-to-close 0.6s forwards;
+}
+
+.nav-btn.active .bar-bottom {
+  animation: bottom-to-close 0.6s forwards;
+}
+
+.nav-btn.inactive .bar-top {
+  top: 50%;
+  rotate: -45deg;
+  animation: top-to-open 0.6s forwards;
+}
+
+.nav-btn.inactive .bar-middle {
+  opacity: 0;
+  animation: mid-to-open 0.4s 0.6s forwards;
+}
+
+.nav-btn.inactive .bar-bottom {
+  top: 50%;
+  rotate: 45deg;
+  animation: bottom-to-open 0.6s forwards;
+}
+
+/* mobile nav menu */
+.mobile-nav {
   position: absolute;
   left: 100%;
   display: flex;
@@ -68,18 +99,127 @@ nav {
   transition: left 0.6s ease-in-out;
 }
 
-nav.active {
+.mobile-nav.active {
   left: 25%;
 }
 
-nav ul {
+.mobile-nav ul {
   height: 50%;
 }
 
 .nav-item {
-  padding-bottom: 1rem;
   font-size: 1.25rem;
-  text-align: center;
   color: var(--expanded-text);
+  transition: color 0.4s ease, transform 0.4s ease;
   list-style: none;
+}
+
+.mobile-nav .nav-item {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  color: var(--hamburger-lines);
+  transform: scale(1.2);
+}
+
+/* desktop nav */
+.desktop-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav-btn,
+  .mobile-nav {
+    display: none;
+  }
+
+  .desktop-nav,
+  .desktop-nav ul {
+    display: flex;
+  }
+
+  .desktop-nav ul {
+    gap: 1.5rem;
+    align-items: center;
+    margin-right: 1.5rem;
+  }
+}
+
+/* animations */
+
+@keyframes top-to-close {
+  35% {
+    top: 75%;
+    rotate: 0deg;
+  }
+  100% {
+    top: 50%;
+    rotate: -45deg;
+  }
+}
+
+@keyframes top-to-open {
+  35% {
+    top: 75%;
+    rotate: 0deg;
+  }
+  100% {
+    top: 25%;
+    rotate: 0deg;
+  }
+}
+
+@keyframes bottom-to-close {
+  35% {
+    top: 75%;
+    rotate: 0deg;
+  }
+  100% {
+    top: 50%;
+    rotate: 45deg;
+  }
+}
+
+@keyframes bottom-to-open {
+  35% {
+    top: 75%;
+    rotate: 0deg;
+  }
+  100% {
+    top: 75%;
+    rotate: 0deg;
+  }
+}
+
+@keyframes mid-to-close {
+  35% {
+    top: 75%;
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    top: 75%;
+    opacity: 0;
+  }
+}
+
+@keyframes mid-to-open {
+  0% {
+    top: 25%;
+    opacity: 1;
+  }
+  50% {
+    top: 50%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 50%;
+    opacity: 1;
+  }
 }
