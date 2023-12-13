@@ -11,10 +11,12 @@ navBtn.addEventListener("click", () => {
   // update aria-hidden
   let isHidden = mobileNav.getAttribute("aria-hidden") === "true";
   mobileNav.setAttribute("aria-hidden", !isHidden);
-  // remove animation
-  setTimeout(() => {
-    hamburgerLines.forEach((bar) => {
-      bar.style.animation = null;
-    });
-  }, 600);
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 768) {
+    navBtn.classList.add("inactive");
+    navBtn.classList.remove("active");
+    mobileNav.classList.remove("active");
+  }
 });
